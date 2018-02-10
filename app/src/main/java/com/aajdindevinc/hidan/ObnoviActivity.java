@@ -1,12 +1,16 @@
 package com.aajdindevinc.hidan;
 
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.TimePicker;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -14,12 +18,21 @@ import java.net.URLDecoder;
 public class ObnoviActivity extends AppCompatActivity {
 
    Button obnovi;
+   Button setTime;
 
    WebView v;
    WebView getSource;
    WebView view;
 
+   TimePicker timePicker;
+   TimePickerDialog timePickerDialog;
+
+
    String web = new String();
+
+   int hour;
+   int minute;
+   int second;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +128,39 @@ public class ObnoviActivity extends AppCompatActivity {
                         getSource.loadUrl("https://www.olx.ba/mojpik/obnovite");
                     }
                 });
+            }
+        });
+
+        timePicker = findViewById(R.id.timePicker);
+
+        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker timePicker, int i, int i1) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    hour = timePicker.getHour();
+
+                    System.out.println("Hour: " + hour);
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    minute = timePicker.getMinute();
+
+                    System.out.println("Minute: " + minute);
+                }
+            }
+        });
+
+
+        setTime = findViewById(R.id.setTime);
+
+        setTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment dialogFragment = new TimePickerDialog(getApplicationContext(), new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                        System.out.print("wow");
+                    }
+                }, 12, 22, true);
             }
         });
     }
