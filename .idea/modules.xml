@@ -4,7 +4,9 @@
     <modules>
       <module fileurl="file://C:\Users\jose_2000_\Desktop\Hidan-master\Hidan.iml" filepath="C:\Users\jose_2000_\Desktop\Hidan-master\Hidan.iml" />
       <module fileurl="file://$PROJECT_DIR$/Hidan-master.iml" filepath="$PROJECT_DIR$/Hidan-master.iml" />
+      <module fileurl="file://C:\Users\ahmet\AndroidStudioProjects\APP\Hidan-master\Hidan-master.iml" filepath="C:\Users\ahmet\AndroidStudioProjects\APP\Hidan-master\Hidan-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\ahmet\AndroidStudioProjects\APP\Hidan-master\app\app.iml" filepath="C:\Users\ahmet\AndroidStudioProjects\APP\Hidan-master\app\app.iml" />
     </modules>
   </component>
 </project>

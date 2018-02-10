@@ -21,6 +21,9 @@ public class ObnoviActivity extends AppCompatActivity {
 
    String web = new String();
 
+
+   //IAMKUGLAAA
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
