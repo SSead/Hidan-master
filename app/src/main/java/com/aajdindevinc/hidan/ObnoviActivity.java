@@ -22,7 +22,7 @@ public class ObnoviActivity extends AppCompatActivity {
    String web = new String();
 
 
-   //IAMKUGLAAA
+   //IAMKUGLAAA54545454
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
