@@ -52,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
         //isFirstTime();
         final Intent intent = new Intent(this, ObnoviActivity.class);
 
+        System.out.println("kuglaa");
+////dfs;kdfjkjsdfnjdsnfjkds
+        Intent intent1 = new Intent(this, Obnova.class);
+        startService(intent1);
+
 
         if(database.getBoolean("isUserSaved")){
             startActivity(intent);

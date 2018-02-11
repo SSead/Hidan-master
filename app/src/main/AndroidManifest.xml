@@ -20,7 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ObnoviActivity"></activity>
+        <activity android:name=".ObnoviActivity" />
+
+        <service
+            android:name=".Obnova"
+            android:exported="true"
+            android:stopWithTask="false">
+
+        </service>
     </application>
 
 </manifest>
