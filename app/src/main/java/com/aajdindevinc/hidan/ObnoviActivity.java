@@ -1,6 +1,9 @@
 package com.aajdindevinc.hidan;
 
+import android.app.DialogFragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,11 +21,10 @@ public class ObnoviActivity extends AppCompatActivity {
    WebView v;
    WebView getSource;
    WebView view;
-
    String web = new String();
 
+   Button dgm;
 
-   //IAMKUGLAAA54545454
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +42,8 @@ public class ObnoviActivity extends AppCompatActivity {
 
         view.canGoForward();
         view.loadUrl("https://www.olx.ba");
-        view.setWebViewClient(new WebViewClient(){
-            public void onPageFinished(WebView view , String url){
+        view.setWebViewClient(new WebViewClient() {
+            public void onPageFinished(WebView view, String url) {
                 view.loadUrl("javascript:$('#box-login').toggle();$('#box-login #username').focus();$('#loginbtn').toggleClass('sd');");
                 view.loadUrl("javascript:var uselessvar =document.getElementById('username').value='" + bundle.get("username").toString() + "';");
                 view.loadUrl("javascript:var uselessvar =document.getElementById('password').value='" + bundle.get("password").toString() + "';");
@@ -69,12 +71,12 @@ public class ObnoviActivity extends AppCompatActivity {
         getSource.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
         getSource.setScrollbarFadingEnabled(false);
 
-        String newUA= "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0";
+        String newUA = "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0";
         getSource.getSettings().setUserAgentString(newUA);
 
         getSource.loadUrl("https://www.olx.ba/mojpik/obnovite");
 
-        getSource.setWebViewClient(new WebViewClient(){
+        getSource.setWebViewClient(new WebViewClient() {
 
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -87,16 +89,11 @@ public class ObnoviActivity extends AppCompatActivity {
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-
-
-//
             }
         });
 
         v = new WebView(this);
-
         obnovi = findViewById(R.id.button);
-
         obnovi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,8 +104,8 @@ public class ObnoviActivity extends AppCompatActivity {
 
                 System.out.println(web);
                 v.loadUrl("https://www.olx.ba/mojpik/obnovite");
-                v.setWebViewClient(new WebViewClient(){
-                    public void onPageFinished(WebView view , String url){
+                v.setWebViewClient(new WebViewClient() {
+                    public void onPageFinished(WebView view, String url) {
 
                         v.loadUrl("javascript:var uselessvar = " +
                                 web.substring(web.indexOf("onclick=\"obnoviartikal_mojpik(") + 9, web.indexOf(")\">", web.indexOf("onclick=\"obnoviartikal_mojpik(")) + 1) + ";");
@@ -120,5 +117,9 @@ public class ObnoviActivity extends AppCompatActivity {
                 });
             }
         });
+
+
+
+
     }
 }
