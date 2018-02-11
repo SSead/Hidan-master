@@ -10,6 +10,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -22,6 +23,11 @@ public class ObnoviActivity extends AppCompatActivity {
    WebView getSource;
    WebView view;
    String web = new String();
+   String username;
+   String password;
+   TinyDB database;
+   Button logout;
+   TextView inAs;
 
    Button dgm;
 
@@ -31,22 +37,39 @@ public class ObnoviActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_obnovi);
 
+        database = new TinyDB(this);
+
+        inAs = findViewById(R.id.user);
+        logout = findViewById(R.id.logout);
+
         Intent i = getIntent();
         final Bundle bundle = i.getExtras();
-        System.out.println(bundle.get("username"));
+//        System.out.println(bundle.get("username"));
 
         //view = findViewById(R.id.web);
+        if(database.getBoolean("isUserSaved")){
+            username = database.getString("username");
+            password = database.getString("password");
+        }
+
+        else {
+            logout.setVisibility(View.GONE);
+            username = bundle.get("username").toString();
+            password = bundle.get("password").toString();
+        }
+
+        inAs.setText("Ulogovani ste kao: " +username);
+
         view = new WebView(this);
         view.getSettings().setJavaScriptEnabled(true);
         view.getSettings().setDomStorageEnabled(true);
-
         view.canGoForward();
         view.loadUrl("https://www.olx.ba");
         view.setWebViewClient(new WebViewClient() {
             public void onPageFinished(WebView view, String url) {
                 view.loadUrl("javascript:$('#box-login').toggle();$('#box-login #username').focus();$('#loginbtn').toggleClass('sd');");
-                view.loadUrl("javascript:var uselessvar =document.getElementById('username').value='" + bundle.get("username").toString() + "';");
-                view.loadUrl("javascript:var uselessvar =document.getElementById('password').value='" + bundle.get("password").toString() + "';");
+                view.loadUrl("javascript:var uselessvar =document.getElementById('username').value='" + username + "';");
+                view.loadUrl("javascript:var uselessvar =document.getElementById('password').value='" + password + "';");
                 view.loadUrl("javascript:document.getElementById('btnlogin1').click()");
 
                 //view.loadUrl("https://www.olx.ba/mojpik/obnovite");
@@ -118,6 +141,15 @@ public class ObnoviActivity extends AppCompatActivity {
             }
         });
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(database.getBoolean("isUserSaved")){
+                    database.putBoolean("isUserSaved", false);
+                }
+                finish();
+            }
+        });
 
 
 
