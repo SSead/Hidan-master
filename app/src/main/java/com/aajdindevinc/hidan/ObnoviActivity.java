@@ -78,7 +78,11 @@ public class ObnoviActivity extends AppCompatActivity {
             }
         });
 
+        Intent intent = new Intent(this, Obnavljac.class);
+        //intent.putExtra("web", web);
+        startService(intent);
 
+/*
         getSource = new WebView(this);
 
         getSource.canGoForward();
@@ -115,14 +119,14 @@ public class ObnoviActivity extends AppCompatActivity {
             }
         });
 
+
+
         v = new WebView(this);
         obnovi = findViewById(R.id.button);
         obnovi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 v.getSettings().setJavaScriptEnabled(true);
-///sadasdasdasdfddfvdfdfdf
                 v.canGoForward();
 
                 System.out.println(web);
@@ -140,6 +144,7 @@ public class ObnoviActivity extends AppCompatActivity {
                 });
             }
         });
+        */
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,8 +155,6 @@ public class ObnoviActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
 
     }
 }
