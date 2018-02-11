@@ -99,7 +99,7 @@ public class ObnoviActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 v.getSettings().setJavaScriptEnabled(true);
-
+///sadasdasdas
                 v.canGoForward();
 
                 System.out.println(web);
