@@ -3,6 +3,7 @@ package com.aajdindevinc.hidan;
 import android.app.DialogFragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,10 +11,15 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.sql.Time;
 
 public class ObnoviActivity extends AppCompatActivity {
 
@@ -29,6 +35,10 @@ public class ObnoviActivity extends AppCompatActivity {
    TinyDB database;
    Button logout;
    TextView inAs;
+   TimePicker timePicker;
+   EditText number;
+
+   Switch aSwitch;
 
    Button dgm;
 
@@ -39,9 +49,15 @@ public class ObnoviActivity extends AppCompatActivity {
         setContentView(R.layout.activity_obnovi);
 
         database = new TinyDB(this);
-
         inAs = findViewById(R.id.user);
         logout = findViewById(R.id.logout);
+
+        aSwitch = findViewById(R.id.obnova);
+
+       timePicker = findViewById(R.id.timer);
+
+       number = findViewById(R.id.num);
+
 
         Intent i = getIntent();
         final Bundle bundle = i.getExtras();
@@ -79,15 +95,47 @@ public class ObnoviActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = new Intent(this, Obnavljac.class);
+        final Intent intent = new Intent(this, Obnavljac.class);
         //intent.putExtra("web", web);
-        startService(intent);
+
+
+        aSwitch.setChecked(database.getBoolean("isActivated"));
+        aSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(aSwitch.isChecked()){
+                    database.putBoolean("isActivated", true);
+                    if(!database.getBoolean("timeAvlbl")) {
+                        try {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                database.putInt("hour", timePicker.getHour());
+                                database.putInt("minute", timePicker.getMinute());
+                                database.putInt("numOf", Integer.parseInt(number.getText().toString()));
+                                database.putBoolean("timeAvlbl", true);
+                            }
+                        } catch (Exception e) {
+                            //Toast.makeText(this, "ERORRRRRRRR", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    startService(intent);
+
+                }
+                else{
+
+                    database.putBoolean("timeAvlbl", false);
+                    stopService(intent);
+                }
+
+
+            }
+        });
+
 
 /*
         getSource = new WebView(this);
-
         getSource.canGoForward();
-
         getSource.getSettings().setJavaScriptEnabled(true);
         getSource.getSettings().setLoadWithOverviewMode(true);
         getSource.getSettings().setUseWideViewPort(true);

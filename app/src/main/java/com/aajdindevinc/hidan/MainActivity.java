@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         database = new TinyDB(this);
+        isFirstTime();
         //isFirstTime();
         final Intent intent = new Intent(this, ObnoviActivity.class);
 
@@ -86,7 +87,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
 
 
+    private boolean isFirstTime() {
+        if (firstTime == null) {
+            SharedPreferences mPreferences = this.getSharedPreferences("first_time", Context.MODE_PRIVATE);
+            firstTime = mPreferences.getBoolean("firstTime", true);
+            if (firstTime) {
+                database.putBoolean("isActivated", false);
+                SharedPreferences.Editor editor = mPreferences.edit();
+                editor.putBoolean("firstTime", false);
+                editor.commit();
+            }
+        }
+        return firstTime;
     }
 }

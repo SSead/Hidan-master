@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.aajdindevinc.hidan.ObnoviActivity">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="obnovi"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.799" />
-
     <EditText
         android:id="@+id/num"
         android:layout_width="wrap_content"
@@ -33,7 +22,7 @@
         app:layout_constraintVertical_bias="0.552" />
 
     <TimePicker
-
+        android:id="@+id/timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:timePickerMode="spinner"
@@ -45,6 +34,18 @@
 
     </TimePicker>
 
+    <Switch
+        android:id="@+id/obnova"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ukljuci obanvljanje   "
+        app:layout_constraintBottom_toTopOf="@+id/user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/num"
+        app:layout_constraintVertical_bias="0.472" />
+
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
@@ -54,9 +55,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.945"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.644" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/user"
@@ -65,9 +64,7 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/logout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.581" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

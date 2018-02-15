@@ -11,6 +11,7 @@ import android.webkit.WebViewClient;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Calendar;
 
 public class Obnavljac extends Service {
 
@@ -30,6 +31,7 @@ public class Obnavljac extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
 
+        TinyDB database = new TinyDB(this);
 
         final WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
@@ -94,23 +96,20 @@ public class Obnavljac extends Service {
         v.canGoForward();
 
         System.out.println(web);
-        v.loadUrl("https://www.olx.ba/mojpik/obnovite");
-        v.setWebViewClient(new WebViewClient() {
-            public void onPageFinished(WebView view, String url) {
 
-                v.loadUrl("javascript:var uselessvar = " +
-                        web.substring(web.indexOf("onclick=\"obnoviartikal_mojpik(") + 9, web.indexOf(")\">", web.indexOf("onclick=\"obnoviartikal_mojpik(")) + 1) + ";");
 
-                System.out.println(web.substring(web.indexOf("onclick=\"obnoviartikal_mojpik(") + 9, web.indexOf(")\">", web.indexOf("onclick=\"obnoviartikal_mojpik(")) + 1));
 
-                getSource.loadUrl("https://www.olx.ba/mojpik/obnovite");
-            }
-        });
 
         //windowManager.addView(v,params);
 
 
+        //System.out.println(database.getInt("hour")+" "+database.getInt("minute"));
+
         return flags;
+    }
+
+    void obnovi (){
+
     }
 
 }
